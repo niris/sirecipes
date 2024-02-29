@@ -1,0 +1,16 @@
+.tag {
+  border-radius: 0.5em;
+}
+
+.result {
+  margin-top: 2em;
+}
+
+.result > .card {
+  margin-top: 1em;
+  text-align: left;
+}
+
+.button-container > button {
+  margin: 0.25em;
+}
