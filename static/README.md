@@ -1,30 +1,69 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+# PWA with React + TypeScript + Vite
+## Installation from the project source code 
+1. Install dependencies
+```
+npm install
+```
+2. Build app 
+```
+npm run build
+npm run preview
+```
+or run app in dev mode 
+```
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## For project installation & configuration from scratch ([Reference](https://www.saurabhmisra.dev/setup-react-pwa-using-vite/))
+1. Install Vite + React starter project
+```
+  npm create vite@latest
+```
+  Enter the `project name` => Select `React` as the framework and `TypeScript` as the variant
+2. Install Vite PWA plugin
+```
+npm i vite-plugin-pwa
+```
+3. Install PWA Assets Generator plugin
+   This step is optional but pratical for automatically generate neccessary assets for PWA
+```
+npm i @vite-pwa/assets-generator
+```
+4. Configure the Vite PWA plugin
+  - import VitePWA to vite.config.ts
+    ```
+      import { VitePWA } from 'vite-plugin-pwa';
+    ```
+  - append the PWA plugin configuration to the plugins list (see vite.config.ts file)
+5. Add an NPM script in package.json for generating PWA assets
+  ```
+  {
+    "scripts": {
+      "generate-pwa-assets": "pwa-assets-generator --preset minimal public/logo.svg"
+    }
+  }
+  ```
+6. Add logo.svg file to `/public`
+7. Create PWA assets
+  ```
+  npm run generate-pwa-assets
+  ```
+8. Add <link> and <meta> tags for PWA assets in index.html
+  ```
+  <head>
+    <!-- other tags -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" sizes="180x180" />
+    <link rel="mask-icon" href="/mask-icon.svg" color="#FFFFFF">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+  ```
+9. Build app 
+```
+npm run build
+npm run preview
+```
+or run app in dev mode 
+```
+npm run dev
+```
